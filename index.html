@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,16 +17,14 @@
     <link rel="manifest" href='data:application/manifest+json;base64,eyJuYW1lIjogIkNBUEFDSVRJVU1YIiwic2hvcnRfbmFtZSI6ICJDQVBBQ0lUSVVNWCIsInN0YXJ0X3VybCI6ICIuIiwiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6ICIjZmZmZmZmIiwidGhlbWVfY29sb3IiOiAiIzFlM2E4YSIsImljb25zIjogW3sic3JjIjogImh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzEwMDk3LzEwMDk3OTA2LnBuZyIsInNpemVzIjogIjUxMng1MTIiLCJ0eXBlIjogImltYWdlL3BuZyJdfQ=='>
 
     <style>
-        /* PALETA DE COLORES AZUL PROFESIONAL */
-        :root { --primary: #1e3a8a; /* Azul Marino */ --accent: #2563eb; /* Azul Rey */ --bg: #f3f4f6; --text: #1f2937; }
+        :root { --primary: #1e3a8a; --accent: #2563eb; --bg: #f3f4f6; --text: #1f2937; }
         
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 15px; padding-bottom: 120px; color: var(--text); }
 
-        /* --- VISTA APP (EDICIÓN) --- */
         .app-view { display: block; }
         
         .section-title {
-            font-size: 0.85rem; font-weight: 800; color: var(--primary); /* Azul Marino */
+            font-size: 0.85rem; font-weight: 800; color: var(--primary); 
             text-transform: uppercase; margin: 25px 0 10px 0; border-bottom: 2px solid #cbd5e1;
             padding-bottom: 5px;
         }
@@ -40,45 +37,49 @@
             width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px;
             font-size: 16px; margin-bottom: 15px; background: #f8fafc; font-family: inherit; transition: 0.2s;
         }
-        input:focus, textarea:focus { background: white; border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); } /* Sombra Azul */
+        input:focus, textarea:focus { background: white; border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); }
         
         .row { display: flex; gap: 10px; } .col { flex: 1; }
 
-        /* Caja de Logo */
         .logo-box {
-            background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%); /* Fondo Azulito Claro */
+            background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%); 
             border: 2px dashed #3b82f6; border-radius: 12px;
             padding: 10px; text-align: center; margin-bottom: 20px; cursor: pointer;
             display: flex; align-items: center; justify-content: center; height: 110px;
         }
         .logo-preview-app { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; display: none; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-        /* Items */
         .item-card { background: white; border-left: 5px solid var(--accent); padding: 15px; border-radius: 8px; margin-bottom: 10px; position: relative; }
         .btn-del { position: absolute; top: 10px; right: 10px; background: #fee2e2; color: red; border:none; width:28px; height:28px; border-radius:50%; font-weight:bold; cursor: pointer; }
 
-        /* Totales App */
-        .app-total { background: #1e3a8a; /* Azul Marino */ color: white; padding: 20px; border-radius: 12px; text-align: right; margin-top: 20px; }
+        .app-total { background: #1e3a8a; color: white; padding: 20px; border-radius: 12px; text-align: right; margin-top: 20px; }
         .total-num { font-size: 2rem; font-weight: bold; color: #fbbf24; }
 
-        /* Botones */
         .fab { position: fixed; bottom: 20px; left: 15px; right: 15px; display: flex; gap: 10px; z-index: 99; }
         .btn { flex: 1; padding: 16px; border: none; border-radius: 50px; font-weight: bold; color: white; font-size: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; }
         .btn-add { background: #334155; }
-        .btn-pdf { background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%); /* Degradado Azul */ }
+        .btn-pdf { background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%); }
 
-        /* --- VISTA PDF (IMPRESIÓN) --- */
         #pdf-view { display: none; }
 
+        /* --- CONFIGURACIÓN PARA IMPRESIÓN LIMPIA --- */
         @media print {
-            body { background: white; padding: 0; color: black; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+            @page { margin: 0; } /* QUITA ENCABEZADOS Y PIES DE PÁGINA DEL NAVEGADOR */
+            
+            body { 
+                background: white; 
+                padding: 0; 
+                margin: 1.5cm; /* MARGEN PROFESIONAL EN LA HOJA */
+                color: black; 
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            }
+
             .app-view, .fab { display: none !important; } 
             #pdf-view { display: block !important; } 
             
-            /* HEADER PREMIUM AZUL */
             .pdf-header {
                 display: flex; justify-content: space-between; align-items: center;
-                border-bottom: 4px solid var(--primary); padding-bottom: 20px; margin-bottom: 25px; margin-top: 20px;
+                border-bottom: 4px solid var(--primary); padding-bottom: 20px; margin-bottom: 25px;
             }
             
             .logo-area { display: flex; align-items: center; gap: 20px; }
@@ -88,42 +89,38 @@
             }
             
             .company-name-title {
-                font-size: 18pt; font-weight: bold; color: #1e3a8a; /* Azul Marino */
+                font-size: 18pt; font-weight: bold; color: #1e3a8a; 
                 text-transform: uppercase; line-height: 1.1; max-width: 300px;
             }
 
             .doc-meta { text-align: right; }
             .doc-title { 
-                font-size: 22pt; font-weight: 800; color: var(--primary); /* Azul Marino */
+                font-size: 22pt; font-weight: 800; color: var(--primary); 
                 text-transform: uppercase; margin-bottom: 10px; display: block;
             }
             .meta-row { font-size: 11pt; margin-bottom: 4px; }
 
-            /* GRID DATOS */
-            .pdf-grid { display: flex; gap: 30px; margin-bottom: 30px; }
+            .pdf-grid { display: flex; gap: 20px; margin-bottom: 30px; }
             .pdf-box { flex: 1; border: 1px solid #ccc; border-radius: 6px; overflow: hidden; }
             
-            /* TÍTULOS DE CAJAS EN AZUL */
             .pdf-title { 
-                background: var(--primary); /* FONDO AZUL MARINO */
-                color: white; /* TEXTO BLANCO */
+                background: var(--primary); 
+                color: white; 
                 font-weight: bold; text-align: center;
-                padding: 6px; font-size: 10pt; letter-spacing: 1px; border-bottom: 1px solid #ccc;
+                padding: 6px; font-size: 10pt; letter-spacing: 1px;
             }
             .pdf-content { padding: 12px; font-size: 10pt; line-height: 1.5; }
             .pdf-bold { font-weight: bold; font-size: 9pt; color: #1e3a8a; margin-right: 5px; }
 
-            /* TABLA */
             .pdf-table-header {
-                background: var(--primary); /* AZUL MARINO */
+                background: var(--primary); 
                 color: white; font-weight: bold; padding: 6px 10px;
-                font-size: 10pt; letter-spacing: 1px; margin-bottom: 0; border-radius: 4px 4px 0 0;
+                font-size: 10pt; letter-spacing: 1px; border-radius: 4px 4px 0 0;
             }
             .pdf-table { width: 100%; border-collapse: collapse; }
             .pdf-table th { background: #eff6ff; border-bottom: 2px solid #1e3a8a; padding: 8px; text-align: left; font-size: 9pt; color: #1e3a8a; }
             .pdf-table td { border-bottom: 1px solid #ddd; padding: 8px; font-size: 10pt; }
 
-            /* TOTALES */
             .pdf-totals { width: 45%; margin-left: auto; text-align: right; margin-top: 25px; }
             .pdf-row { display: flex; justify-content: space-between; border-bottom: 1px dotted #ccc; padding: 6px 0; font-size: 11pt; }
             .pdf-final { border-top: 3px solid #1e3a8a; font-weight: bold; font-size: 14pt; margin-top: 10px; padding-top: 10px; color: #1e3a8a; }
@@ -145,20 +142,20 @@
             </div>
             
             <span class="label">Título del Documento</span>
-            <input type="text" id="in_DocTitle" value="FACTURA / NOTA" placeholder="Ej. COTIZACIÓN" oninput="sync()" style="font-weight:bold; text-align:center; color:#1e3a8a;">
+            <input type="text" id="in_DocTitle" value="COTIZACIÓN" oninput="sync()" style="font-weight:bold; text-align:center; color:#1e3a8a;">
         </div>
 
         <div class="section-title">1. DATOS DEL EMISOR (TÚ)</div>
         <div class="card">
             <span class="label">Tu Nombre o Empresa</span>
-            <input type="text" id="in_eName" placeholder="Tu Empresa SA de CV" oninput="sync()">
+            <input type="text" id="in_eName" placeholder="Tu Empresa" oninput="sync()">
             
             <div class="row">
                 <div class="col"><span class="label">RFC</span><input type="text" id="in_eRFC" placeholder="RFC" oninput="sync()"></div>
                 <div class="col"><span class="label">Teléfono</span><input type="tel" id="in_eTel" placeholder="Tel" oninput="sync()"></div>
             </div>
             <span class="label">Dirección Completa</span>
-            <textarea id="in_eDir" rows="2" placeholder="Calle, Número, Colonia, CP, Ciudad" oninput="sync()"></textarea>
+            <textarea id="in_eDir" rows="2" placeholder="Dirección" oninput="sync()"></textarea>
         </div>
 
         <div class="section-title">2. DATOS DEL CLIENTE</div>
@@ -171,16 +168,15 @@
                 <div class="col"><span class="label">Fecha</span><input type="date" id="in_Date" onchange="sync()"></div>
             </div>
             
-            <span class="label">Dirección Cliente</span>
-            <textarea id="in_cDir" rows="2" placeholder="Dirección Cliente" oninput="sync()"></textarea>
-            
             <div class="row">
                 <div class="col"><span class="label">Folio</span><input type="text" id="in_Folio" placeholder="001" oninput="sync()"></div>
-                <div class="col"><span class="label">Correo (Opcional)</span><input type="text" id="in_cMail" placeholder="Email" oninput="sync()"></div>
+                <div class="col"><span class="label">Correo</span><input type="text" id="in_cMail" placeholder="Email" oninput="sync()"></div>
             </div>
+            <span class="label">Dirección Cliente</span>
+            <textarea id="in_cDir" rows="2" placeholder="Dirección Cliente" oninput="sync()"></textarea>
         </div>
 
-        <div class="section-title">CONCEPTOS</div>
+        <div class="section-title">3. CONCEPTOS</div>
         <div id="itemsList"></div>
 
         <div class="app-total">
@@ -197,7 +193,7 @@
             </div>
             
             <div class="doc-meta">
-                <span id="out_DocTitle" class="doc-title">FACTURA</span>
+                <span id="out_DocTitle" class="doc-title">COTIZACIÓN</span>
                 <div class="meta-row">Folio: <span id="out_Folio" style="font-weight:bold"></span></div>
                 <div class="meta-row">Fecha: <span id="out_Date"></span></div>
             </div>
@@ -246,7 +242,7 @@
 
     <div class="fab">
         <button class="btn btn-add" onclick="addItem()">+ ITEM</button>
-        <button class="btn btn-pdf" onclick="window.print()">🖨️ PDF</button>
+        <button class="btn btn-pdf" onclick="window.print()">🖨️ GENERAR PDF</button>
     </div>
 
     <script>
@@ -269,7 +265,7 @@
                     document.getElementById('logoApp').style.display='block';
                     document.getElementById('logoText').style.display='none';
                     document.getElementById('pdfLogo').src = d;
-                    try { localStorage.setItem('logo_capacitium_blue', d); } catch(x) {}
+                    try { localStorage.setItem('logo_capacitium_v2', d); } catch(x) {}
                 };
                 r.readAsDataURL(input.files[0]);
             }
@@ -343,17 +339,17 @@
         function save() {
             const ids = ['in_eName','in_eRFC','in_eTel','in_eDir','in_cName','in_cRFC','in_cDir','in_cMail','in_Folio','in_Date','in_DocTitle'];
             const data = { items, vals: ids.map(id => document.getElementById(id).value) };
-            localStorage.setItem('data_capacitium_blue', JSON.stringify(data));
+            localStorage.setItem('data_capacitium_v2', JSON.stringify(data));
         }
 
         function load() {
-            const d = JSON.parse(localStorage.getItem('data_capacitium_blue'));
+            const d = JSON.parse(localStorage.getItem('data_capacitium_v2'));
             if(d) {
                 items = d.items;
                 const ids = ['in_eName','in_eRFC','in_eTel','in_eDir','in_cName','in_cRFC','in_cDir','in_cMail','in_Folio','in_Date','in_DocTitle'];
                 ids.forEach((id, i) => document.getElementById(id).value = d.vals[i] || '');
             }
-            const l = localStorage.getItem('logo_capacitium_blue');
+            const l = localStorage.getItem('logo_capacitium_v2');
             if(l) {
                 document.getElementById('logoApp').src=l;
                 document.getElementById('logoApp').style.display='block';
