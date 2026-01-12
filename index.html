@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1e3a8a"> <meta name="apple-mobile-web-app-title" content="CAPACITIUMX">
+    <title>CAPACITIUMX</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%233b82f6;stop-opacity:1'/><stop offset='100%25' style='stop-color:%231e3a8a;stop-opacity:1'/></linearGradient></defs><rect width='512' height='512' rx='100' fill='url(%23g)'/><path d='M156 136 h200 v240 h-200 z' fill='white' opacity='0.9'/><rect x='186' y='176' width='140' height='20' rx='5' fill='%2393c5fd'/><rect x='186' y='216' width='140' height='20' rx='5' fill='%23cbd5e1'/><rect x='186' y='256' width='80' height='20' rx='5' fill='%23cbd5e1'/><circle cx='356' cy='376' r='50' fill='%2316a34a'/><path d='M340 376 l10 10 l25 -25' stroke='white' stroke-width='10' fill='none' stroke-linecap='round'/></svg>">
+    
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%233b82f6;stop-opacity:1'/><stop offset='100%25' style='stop-color:%231e3a8a;stop-opacity:1'/></linearGradient></defs><rect width='512' height='512' rx='100' fill='url(%23g)'/><path d='M156 136 h200 v240 h-200 z' fill='white' opacity='0.9'/><rect x='186' y='176' width='140' height='20' rx='5' fill='%2393c5fd'/><rect x='186' y='216' width='140' height='20' rx='5' fill='%23cbd5e1'/><rect x='186' y='256' width='80' height='20' rx='5' fill='%23cbd5e1'/><circle cx='356' cy='376' r='50' fill='%2316a34a'/><path d='M340 376 l10 10 l25 -25' stroke='white' stroke-width='10' fill='none' stroke-linecap='round'/></svg>">
+
+    <link rel="manifest" href='data:application/manifest+json;base64,eyJuYW1lIjogIkNBUEFDSVRJVU1YIiwic2hvcnRfbmFtZSI6ICJDQVBBQ0lUSVVNWCIsInN0YXJ0X3VybCI6ICIuIiwiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6ICIjZmZmZmZmIiwidGhlbWVfY29sb3IiOiAiIzFlM2E4YSIsImljb25zIjogW3sic3JjIjogImh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzEwMDk3LzEwMDk3OTA2LnBuZyIsInNpemVzIjogIjUxMng1MTIiLCJ0eXBlIjogImltYWdlL3BuZyJdfQ=='>
+
+    <style>
+        /* PALETA DE COLORES AZUL PROFESIONAL */
+        :root { --primary: #1e3a8a; /* Azul Marino */ --accent: #2563eb; /* Azul Rey */ --bg: #f3f4f6; --text: #1f2937; }
+        
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 15px; padding-bottom: 120px; color: var(--text); }
+
+        /* --- VISTA APP (EDICIÓN) --- */
+        .app-view { display: block; }
+        
+        .section-title {
+            font-size: 0.85rem; font-weight: 800; color: var(--primary); /* Azul Marino */
+            text-transform: uppercase; margin: 25px 0 10px 0; border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 5px;
+        }
+
+        .card { background: white; padding: 20px; border-radius: 16px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        
+        .label { font-size: 0.75rem; font-weight: bold; color: #64748b; margin-bottom: 5px; display: block; text-transform: uppercase; }
+        
+        input, textarea {
+            width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px;
+            font-size: 16px; margin-bottom: 15px; background: #f8fafc; font-family: inherit; transition: 0.2s;
+        }
+        input:focus, textarea:focus { background: white; border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); } /* Sombra Azul */
+        
+        .row { display: flex; gap: 10px; } .col { flex: 1; }
+
+        /* Caja de Logo */
+        .logo-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%); /* Fondo Azulito Claro */
+            border: 2px dashed #3b82f6; border-radius: 12px;
+            padding: 10px; text-align: center; margin-bottom: 20px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; height: 110px;
+        }
+        .logo-preview-app { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; display: none; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        /* Items */
+        .item-card { background: white; border-left: 5px solid var(--accent); padding: 15px; border-radius: 8px; margin-bottom: 10px; position: relative; }
+        .btn-del { position: absolute; top: 10px; right: 10px; background: #fee2e2; color: red; border:none; width:28px; height:28px; border-radius:50%; font-weight:bold; cursor: pointer; }
+
+        /* Totales App */
+        .app-total { background: #1e3a8a; /* Azul Marino */ color: white; padding: 20px; border-radius: 12px; text-align: right; margin-top: 20px; }
+        .total-num { font-size: 2rem; font-weight: bold; color: #fbbf24; }
+
+        /* Botones */
+        .fab { position: fixed; bottom: 20px; left: 15px; right: 15px; display: flex; gap: 10px; z-index: 99; }
+        .btn { flex: 1; padding: 16px; border: none; border-radius: 50px; font-weight: bold; color: white; font-size: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; }
+        .btn-add { background: #334155; }
+        .btn-pdf { background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%); /* Degradado Azul */ }
+
+        /* --- VISTA PDF (IMPRESIÓN) --- */
+        #pdf-view { display: none; }
+
+        @media print {
+            body { background: white; padding: 0; color: black; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+            .app-view, .fab { display: none !important; } 
+            #pdf-view { display: block !important; } 
+            
+            /* HEADER PREMIUM AZUL */
+            .pdf-header {
+                display: flex; justify-content: space-between; align-items: center;
+                border-bottom: 4px solid var(--primary); padding-bottom: 20px; margin-bottom: 25px; margin-top: 20px;
+            }
+            
+            .logo-area { display: flex; align-items: center; gap: 20px; }
+            .pdf-logo { 
+                width: 120px; height: 120px; 
+                border-radius: 50%; object-fit: cover; border: 1px solid #ddd;
+            }
+            
+            .company-name-title {
+                font-size: 18pt; font-weight: bold; color: #1e3a8a; /* Azul Marino */
+                text-transform: uppercase; line-height: 1.1; max-width: 300px;
+            }
+
+            .doc-meta { text-align: right; }
+            .doc-title { 
+                font-size: 22pt; font-weight: 800; color: var(--primary); /* Azul Marino */
+                text-transform: uppercase; margin-bottom: 10px; display: block;
+            }
+            .meta-row { font-size: 11pt; margin-bottom: 4px; }
+
+            /* GRID DATOS */
+            .pdf-grid { display: flex; gap: 30px; margin-bottom: 30px; }
+            .pdf-box { flex: 1; border: 1px solid #ccc; border-radius: 6px; overflow: hidden; }
+            
+            /* TÍTULOS DE CAJAS EN AZUL */
+            .pdf-title { 
+                background: var(--primary); /* FONDO AZUL MARINO */
+                color: white; /* TEXTO BLANCO */
+                font-weight: bold; text-align: center;
+                padding: 6px; font-size: 10pt; letter-spacing: 1px; border-bottom: 1px solid #ccc;
+            }
+            .pdf-content { padding: 12px; font-size: 10pt; line-height: 1.5; }
+            .pdf-bold { font-weight: bold; font-size: 9pt; color: #1e3a8a; margin-right: 5px; }
+
+            /* TABLA */
+            .pdf-table-header {
+                background: var(--primary); /* AZUL MARINO */
+                color: white; font-weight: bold; padding: 6px 10px;
+                font-size: 10pt; letter-spacing: 1px; margin-bottom: 0; border-radius: 4px 4px 0 0;
+            }
+            .pdf-table { width: 100%; border-collapse: collapse; }
+            .pdf-table th { background: #eff6ff; border-bottom: 2px solid #1e3a8a; padding: 8px; text-align: left; font-size: 9pt; color: #1e3a8a; }
+            .pdf-table td { border-bottom: 1px solid #ddd; padding: 8px; font-size: 10pt; }
+
+            /* TOTALES */
+            .pdf-totals { width: 45%; margin-left: auto; text-align: right; margin-top: 25px; }
+            .pdf-row { display: flex; justify-content: space-between; border-bottom: 1px dotted #ccc; padding: 6px 0; font-size: 11pt; }
+            .pdf-final { border-top: 3px solid #1e3a8a; font-weight: bold; font-size: 14pt; margin-top: 10px; padding-top: 10px; color: #1e3a8a; }
+        }
+    </style>
+</head>
+<body>
+
+    <input type="file" id="logoInput" hidden accept="image/*" onchange="handleLogo(this)">
+
+    <div class="app-view">
+        <h2 style="margin:0 0 15px 0; color:var(--primary); text-align:center;">CAPACITIUMX</h2>
+
+        <div class="card">
+            <span class="label" style="text-align:center; margin-bottom:10px;">LOGO DE EMPRESA</span>
+            <div class="logo-box" onclick="document.getElementById('logoInput').click()">
+                <span id="logoText" style="color:#1e3a8a; font-weight:bold">📸 SUBIR LOGO</span>
+                <img id="logoApp" class="logo-preview-app">
+            </div>
+            
+            <span class="label">Título del Documento</span>
+            <input type="text" id="in_DocTitle" value="FACTURA / NOTA" placeholder="Ej. COTIZACIÓN" oninput="sync()" style="font-weight:bold; text-align:center; color:#1e3a8a;">
+        </div>
+
+        <div class="section-title">1. DATOS DEL EMISOR (TÚ)</div>
+        <div class="card">
+            <span class="label">Tu Nombre o Empresa</span>
+            <input type="text" id="in_eName" placeholder="Tu Empresa SA de CV" oninput="sync()">
+            
+            <div class="row">
+                <div class="col"><span class="label">RFC</span><input type="text" id="in_eRFC" placeholder="RFC" oninput="sync()"></div>
+                <div class="col"><span class="label">Teléfono</span><input type="tel" id="in_eTel" placeholder="Tel" oninput="sync()"></div>
+            </div>
+            <span class="label">Dirección Completa</span>
+            <textarea id="in_eDir" rows="2" placeholder="Calle, Número, Colonia, CP, Ciudad" oninput="sync()"></textarea>
+        </div>
+
+        <div class="section-title">2. DATOS DEL CLIENTE</div>
+        <div class="card">
+            <span class="label">Nombre Cliente</span>
+            <input type="text" id="in_cName" placeholder="Nombre Cliente" oninput="sync()">
+            
+            <div class="row">
+                <div class="col"><span class="label">RFC Cliente</span><input type="text" id="in_cRFC" placeholder="RFC" oninput="sync()"></div>
+                <div class="col"><span class="label">Fecha</span><input type="date" id="in_Date" onchange="sync()"></div>
+            </div>
+            
+            <span class="label">Dirección Cliente</span>
+            <textarea id="in_cDir" rows="2" placeholder="Dirección Cliente" oninput="sync()"></textarea>
+            
+            <div class="row">
+                <div class="col"><span class="label">Folio</span><input type="text" id="in_Folio" placeholder="001" oninput="sync()"></div>
+                <div class="col"><span class="label">Correo (Opcional)</span><input type="text" id="in_cMail" placeholder="Email" oninput="sync()"></div>
+            </div>
+        </div>
+
+        <div class="section-title">CONCEPTOS</div>
+        <div id="itemsList"></div>
+
+        <div class="app-total">
+            <small>Total Final:</small>
+            <div class="total-num" id="appTotalDisplay">$0.00</div>
+        </div>
+    </div>
+
+    <div id="pdf-view">
+        <div class="pdf-header">
+            <div class="logo-area">
+                <img id="pdfLogo" class="pdf-logo">
+                <div id="out_HeaderName" class="company-name-title">NOMBRE EMPRESA</div>
+            </div>
+            
+            <div class="doc-meta">
+                <span id="out_DocTitle" class="doc-title">FACTURA</span>
+                <div class="meta-row">Folio: <span id="out_Folio" style="font-weight:bold"></span></div>
+                <div class="meta-row">Fecha: <span id="out_Date"></span></div>
+            </div>
+        </div>
+
+        <div class="pdf-grid">
+            <div class="pdf-box">
+                <div class="pdf-title">DATOS DEL EMISOR</div>
+                <div class="pdf-content">
+                    <div id="out_eName" style="font-weight:bold; margin-bottom:5px"></div>
+                    <div><span class="pdf-bold">RFC:</span> <span id="out_eRFC"></span></div>
+                    <div><span class="pdf-bold">TEL:</span> <span id="out_eTel"></span></div>
+                    <div><span class="pdf-bold">DOMICILIO:</span> <div id="out_eDir"></div></div>
+                </div>
+            </div>
+            <div class="pdf-box">
+                <div class="pdf-title">DATOS DEL CLIENTE</div>
+                <div class="pdf-content">
+                    <div id="out_cName" style="font-weight:bold; margin-bottom:5px"></div>
+                    <div><span class="pdf-bold">RFC:</span> <span id="out_cRFC"></span></div>
+                    <div><span class="pdf-bold">DOMICILIO:</span> <div id="out_cDir"></div></div>
+                    <div style="margin-top:2px"><span class="pdf-bold">EMAIL:</span> <span id="out_cMail"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pdf-table-header">DESGLOSE DE CONCEPTOS</div>
+        <table class="pdf-table">
+            <thead>
+                <tr>
+                    <th width="50%">DESCRIPCIÓN</th>
+                    <th width="10%" align="center">CANT.</th>
+                    <th width="20%" align="right">PRECIO U.</th>
+                    <th width="20%" align="right">IMPORTE</th>
+                </tr>
+            </thead>
+            <tbody id="pdfTableBody"></tbody>
+        </table>
+
+        <div class="pdf-totals">
+            <div class="pdf-row"><span>SUBTOTAL:</span> <span id="out_Sub">$0.00</span></div>
+            <div class="pdf-row"><span>IVA (16%):</span> <span id="out_Tax">$0.00</span></div>
+            <div class="pdf-final"><span>TOTAL:</span> <span id="out_Total">$0.00</span></div>
+        </div>
+    </div>
+
+    <div class="fab">
+        <button class="btn btn-add" onclick="addItem()">+ ITEM</button>
+        <button class="btn btn-pdf" onclick="window.print()">🖨️ PDF</button>
+    </div>
+
+    <script>
+        let items = [{d:"", q:1, p:0}];
+
+        window.onload = () => {
+            document.getElementById('in_Date').valueAsDate = new Date();
+            load(); 
+            renderEditor(); 
+            updateCalculations(); 
+            sync(); 
+        };
+
+        function handleLogo(input) {
+            if(input.files && input.files[0]) {
+                let r = new FileReader();
+                r.onload = e => {
+                    let d = e.target.result;
+                    document.getElementById('logoApp').src = d;
+                    document.getElementById('logoApp').style.display='block';
+                    document.getElementById('logoText').style.display='none';
+                    document.getElementById('pdfLogo').src = d;
+                    try { localStorage.setItem('logo_capacitium_blue', d); } catch(x) {}
+                };
+                r.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function renderEditor() {
+            const list = document.getElementById('itemsList');
+            list.innerHTML = ''; 
+            items.forEach((i, idx) => {
+                let div = document.createElement('div');
+                div.className = 'item-card';
+                div.innerHTML = `
+                    <button class="btn-del" onclick="del(${idx})">×</button>
+                    <span class="label">Descripción</span>
+                    <input type="text" value="${i.d}" oninput="upd(${idx},'d',this.value)">
+                    <div class="row">
+                        <div class="col"><span class="label">Cant.</span><input type="number" value="${i.q}" oninput="upd(${idx},'q',this.value)"></div>
+                        <div class="col"><span class="label">Precio $</span><input type="number" value="${i.p}" oninput="upd(${idx},'p',this.value)"></div>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+            updateCalculations();
+        }
+
+        function updateCalculations() {
+            const tbody = document.getElementById('pdfTableBody');
+            tbody.innerHTML = '';
+            let sub = 0;
+            items.forEach(i => {
+                let t = i.q * i.p; sub += t;
+                let tr = document.createElement('tr');
+                tr.innerHTML = `<td>${i.d}</td><td align="center">${i.q}</td><td align="right">$${Number(i.p).toFixed(2)}</td><td align="right">$${t.toFixed(2)}</td>`;
+                tbody.appendChild(tr);
+            });
+            let tax = sub * 0.16; let total = sub + tax;
+            const f = n => `$${n.toFixed(2)}`;
+            document.getElementById('appTotalDisplay').innerText = f(total);
+            document.getElementById('out_Sub').innerText = f(sub);
+            document.getElementById('out_Tax').innerText = f(tax);
+            document.getElementById('out_Total').innerText = f(total);
+            save();
+        }
+
+        function upd(i, k, v) { 
+            items[i][k] = k==='d'?v:Number(v); 
+            updateCalculations(); 
+        }
+
+        function addItem() { 
+            items.push({d:"", q:1, p:0}); 
+            renderEditor(); 
+            window.scrollTo(0, 10000); 
+        }
+
+        function del(i) { 
+            if(items.length>1){ items.splice(i,1); renderEditor(); } 
+        }
+
+        function sync() {
+            const map = {
+                'in_eName': 'out_eName', 'in_eRFC': 'out_eRFC', 'in_eTel': 'out_eTel', 'in_eDir': 'out_eDir',
+                'in_cName': 'out_cName', 'in_cRFC': 'out_cRFC', 'in_cDir': 'out_cDir', 'in_cMail': 'out_cMail',
+                'in_Folio': 'out_Folio', 'in_Date': 'out_Date', 'in_DocTitle': 'out_DocTitle'
+            };
+            for(let key in map) document.getElementById(map[key]).innerText = document.getElementById(key).value;
+            document.getElementById('out_HeaderName').innerText = document.getElementById('in_eName').value || "NOMBRE EMPRESA";
+            save();
+        }
+
+        function save() {
+            const ids = ['in_eName','in_eRFC','in_eTel','in_eDir','in_cName','in_cRFC','in_cDir','in_cMail','in_Folio','in_Date','in_DocTitle'];
+            const data = { items, vals: ids.map(id => document.getElementById(id).value) };
+            localStorage.setItem('data_capacitium_blue', JSON.stringify(data));
+        }
+
+        function load() {
+            const d = JSON.parse(localStorage.getItem('data_capacitium_blue'));
+            if(d) {
+                items = d.items;
+                const ids = ['in_eName','in_eRFC','in_eTel','in_eDir','in_cName','in_cRFC','in_cDir','in_cMail','in_Folio','in_Date','in_DocTitle'];
+                ids.forEach((id, i) => document.getElementById(id).value = d.vals[i] || '');
+            }
+            const l = localStorage.getItem('logo_capacitium_blue');
+            if(l) {
+                document.getElementById('logoApp').src=l;
+                document.getElementById('logoApp').style.display='block';
+                document.getElementById('logoText').style.display='none';
+                document.getElementById('pdfLogo').src=l;
+            }
+        }
+    </script>
+</body>
+</html>
